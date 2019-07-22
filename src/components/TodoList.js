@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {fetchPosts} from '../actions/postActions';
 import TodoItem from './TodoItem';
@@ -9,6 +9,11 @@ class TodoList extends Component {
        this.props.fetchPosts();
         
     }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.newPost) {
+          this.props.posts.unshift(nextProps.newPost);
+        }
+      }
   
     
     render() {
@@ -24,6 +29,7 @@ class TodoList extends Component {
                             return ( <TodoItem 
                                     key={item.id} 
                                     title={item.title}
+                                    body={item.body}
                                    ></TodoItem>)
                         }
                     )
@@ -41,8 +47,14 @@ class TodoList extends Component {
         
 }
 }
+TodoList.propTypes = {
+    fetchPosts: PropTypes.func.isRequired,
+    posts: PropTypes.array.isRequired,
+    newPost: PropTypes.object
+  };
 const mapStateToProps = state => ({
-    posts: state.posts.items
+    posts: state.posts.items,
+    newPost: state.posts.item
   });
   
 

@@ -1,11 +1,40 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default class TodoInput extends Component {
-    render() {
-        const {item, handleChange, handleSubmit, editItem} = this.props
+
+import { connect } from 'react-redux';
+import {createPost} from '../actions/postActions';
+
+class TodoInput extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          title: '',
+          body: ''
+        };
+    
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+      }
+    
+      onChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+      }
+    
+      onSubmit(e) {
+        e.preventDefault();
+    
+        const post = {
+          title: this.state.title,
+          body: this.state.body
+        };
+    
+        this.props.createPost(post);
+      }
+    render() {        
         return (
             <div className="card card-body my-3">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={this.onSubmit}>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
                             <span className="input-group-text bg-primary text-white">
@@ -13,17 +42,23 @@ export default class TodoInput extends Component {
                             </span>
                         </div>
                         <input type="text" className="form-control" placeholder="Enter Your Work" aria-label="Username" aria-describedby="basic-addon1"
-                            value = {item}
-                            onChange={handleChange}>
+                            name="title"
+                            onChange={this.onChange}
+                            value={this.state.title}>
                         </input>
                     </div>
-                    <button type="submit" className= {
-                        editItem ? "btn btn-block btn-success mt-3" : "btn btn-block btn-primary mt-3"
-                    }> 
-                    {editItem ? "Edit Task" : "Add Task"} 
+                    <button type="submit" className= "btn btn-block btn-primary mt-3"
+                    > 
+                    Add Task"
                        </button>
                 </form>
             </div>
         )
     }
 }
+
+TodoInput.propTypes = {
+    createPost: PropTypes.func.isRequired
+  };
+  
+  export default connect(null, { createPost })(TodoInput);
