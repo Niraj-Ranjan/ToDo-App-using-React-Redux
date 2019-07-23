@@ -14,6 +14,13 @@ import store from './store';
 class App extends React.Component{
 
   render(){
+    const a = state => ({
+      newPost: state.posts.item
+    });
+
+    console.log(a);
+    
+
     return (
       <Provider store = {store}>
       <div className="container">
@@ -22,7 +29,7 @@ class App extends React.Component{
             <h3 className="text-capitalize text-center">
               To Do Input
             </h3>
-            <TodoInput></TodoInput>
+            <TodoInput ></TodoInput>
             <TodoList></TodoList>
           </div>
         </div>

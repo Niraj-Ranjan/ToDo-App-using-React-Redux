@@ -30,14 +30,23 @@ export default function(state = initialState, action) {
 
     case UPDATE_POST:
         console.log(action.id);
+        const filteredList = state.items.filter(item =>
+          item.id !== action.id
+        );
         const UpdatedList = state.items.find(item =>
           item.id !== action.id
         );
         console.log(UpdatedList);
+        // this.setinitialState({
+        //   items: filteredList,
+        //   item: UpdatedList.title
+        // });
         return {
           ...state,
-          items: UpdatedList
+          items: filteredList,
+          item: UpdatedList
         };
+        
 
 
     default:

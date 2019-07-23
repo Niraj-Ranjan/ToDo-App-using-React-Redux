@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 import { connect } from 'react-redux';
-import {createPost} from '../actions/postActions';
+import {createPost,updatePost} from '../actions/postActions';
 
 class TodoInput extends Component {
     constructor(props) {
@@ -25,14 +25,14 @@ class TodoInput extends Component {
         e.preventDefault();
     
         const post = {
-          title: this.state.title,
-          body: this.state.body
-        };
-    
+          title: this.state.title
+        };    
         this.props.createPost(post);
       }
-    render() {        
+    render() {  
+      const {title} = 'aadas';     
         return (
+          
             <div className="card card-body my-3">
                 <form onSubmit={this.onSubmit}>
                     <div className="input-group mb-3">
@@ -49,7 +49,7 @@ class TodoInput extends Component {
                     </div>
                     <button type="submit" className= "btn btn-block btn-primary mt-3"
                     > 
-                    Add Task"
+                    Add Task
                        </button>
                 </form>
             </div>
@@ -61,4 +61,4 @@ TodoInput.propTypes = {
     createPost: PropTypes.func.isRequired
   };
   
-  export default connect(null, { createPost })(TodoInput);
+  export default connect(null, { createPost, updatePost })(TodoInput);

@@ -42,7 +42,7 @@ export const deletePost = (id) => dispatch => {
 };
 
 export const updatePost = (id) => dispatch => {
-  console.log("calling delete action");
+  console.log("calling update action");
   console.log(id);
    fetch('https://jsonplaceholder.typicode.com/posts/'+id, {
       method: 'PUT'})

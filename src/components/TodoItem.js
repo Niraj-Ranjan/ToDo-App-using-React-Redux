@@ -3,18 +3,26 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {fetchPosts} from '../actions/postActions';
 import {deletePost} from '../actions/postActions';
+import {updatePost} from '../actions/postActions';
 
 class TodoItem extends Component {
     deleteContact(e, index){
         e.preventDefault();
         console.log("calling delete dunction");
         console.log(index);
-        
-        
         this.props.deletePost(index);
       }
+
+    updateContact(e, index){
+        e.preventDefault();
+        console.log("calling update function");
+        console.log(index);
+        this.props.updatePost(index);
+        // console.log(this.state).posts.item;
+      }
+
     render() {
-        const {title,handleEdit,id} = this.props;
+        const {title,id} = this.props;
         return (
 
 
@@ -22,7 +30,7 @@ class TodoItem extends Component {
    
                 <div class="list-group-item list-group-item-action">
                 <div className="pull-right">
-                        <span className="mx-2 text-success" onClick={handleEdit}>
+                        <span className="mx-2 text-success" onClick={(e) => this.updateContact(e, id)}>
                             <i className="fa fas fa-edit"></i>
                         </span>
                         <span className="mx-2 text-danger" onClick={(e) => this.deleteContact(e, id)}>
@@ -52,4 +60,4 @@ class TodoItem extends Component {
     }
 }
 
-export default connect(null, {fetchPosts,deletePost}) (TodoItem);
+export default connect(null, {fetchPosts,deletePost, updatePost}) (TodoItem);
