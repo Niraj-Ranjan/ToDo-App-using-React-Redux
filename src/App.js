@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import uuid from 'uuid';
 
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
@@ -23,11 +22,8 @@ class App extends React.Component{
             <h3 className="text-capitalize text-center">
               To Do Input
             </h3>
-            <TodoInput ></TodoInput>
-            <TodoList 
-              
-
-              ></TodoList>
+            <TodoInput></TodoInput>
+            <TodoList></TodoList>
           </div>
         </div>
       </div>
