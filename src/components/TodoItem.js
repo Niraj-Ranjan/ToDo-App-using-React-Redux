@@ -2,10 +2,19 @@ import React, { Component } from 'react'
 
 import {connect} from 'react-redux';
 import {fetchPosts} from '../actions/postActions';
+import {deletePost} from '../actions/postActions';
 
 class TodoItem extends Component {
+    deleteContact(e, index){
+        e.preventDefault();
+        console.log("calling delete dunction");
+        console.log(index);
+        
+        
+        this.props.deletePost(index);
+      }
     render() {
-        const {title, body, handleDelete, handleEdit} = this.props;
+        const {title,handleEdit,id} = this.props;
         return (
 
 
@@ -16,7 +25,7 @@ class TodoItem extends Component {
                         <span className="mx-2 text-success" onClick={handleEdit}>
                             <i className="fa fas fa-edit"></i>
                         </span>
-                        <span className="mx-2 text-danger" onClick={handleDelete}>
+                        <span className="mx-2 text-danger" onClick={(e) => this.deleteContact(e, id)}>
                             <i className="fa fas fa-trash"></i>
                         </span>
                     </div>
@@ -24,8 +33,7 @@ class TodoItem extends Component {
                     
                     <h5 class="mb-1">{title}</h5>
                     </div>
-                    
-                    <small class="text-muted">{body}</small>
+                
                     
                 </div>
             </div>
@@ -44,4 +52,4 @@ class TodoItem extends Component {
     }
 }
 
-export default connect(null, {fetchPosts}) (TodoItem);
+export default connect(null, {fetchPosts,deletePost}) (TodoItem);

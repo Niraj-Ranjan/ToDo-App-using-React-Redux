@@ -1,7 +1,7 @@
-import { FETCH_POSTS, NEW_POST } from './types';
+import { FETCH_POSTS, NEW_POST, REMOVE_POST } from './types';
 
 export const fetchPosts = () => dispatch => {
-  fetch('https://jsonplaceholder.typicode.com/posts')
+  fetch('https://jsonplaceholder.typicode.com/todos')
     .then(res => res.json())
     .then(posts =>
       dispatch({
@@ -26,4 +26,19 @@ export const createPost = postData => dispatch => {
         payload: post
       })
     );
+};
+export const deletePost = (id) => dispatch => {
+  console.log("calling delete action");
+  console.log(id);
+   fetch('https://jsonplaceholder.typicode.com/posts/'+id, {
+      method: 'DELETE'})
+      .then(res=>console.log(res)
+      )
+        dispatch({
+          type: REMOVE_POST,
+          id: id
+        })
+    
+      
+		
 };

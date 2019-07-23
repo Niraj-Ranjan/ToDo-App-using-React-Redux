@@ -29,7 +29,7 @@ class TodoList extends Component {
                             return ( <TodoItem 
                                     key={item.id} 
                                     title={item.title}
-                                    body={item.body}
+                                    id = {item.id}
                                    ></TodoItem>)
                         }
                     )
